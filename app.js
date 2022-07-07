@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 app.use("/api/v1/softwares", softwareRoutes);
 
-app.use("/api/v1/softwares", userRoutes);
+app.use("/api/v1", userRoutes);
 
 module.exports = app;
 
