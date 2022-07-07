@@ -3,13 +3,11 @@
 
 //  Requirements
 
-//  fs to read and write information to files
+//  requiring fs in order to read and write information to the files
 
 const fs = require("fs");
 
-// require app in order to use express
 const express = require("express");
-
 ///////////////////////
 ///////////////////////
 
@@ -26,13 +24,9 @@ const app = express();
 /////////////////////////
 // ////////////////////
 
-// External Logic
+//  External Logic
 
-//  reads the file in asyncronomous way
-
-//  reads the data and parses into json format
-
-const data = JSON.parse(fs.readFileSync("./dev-data/data/softwares.json"));
+usersData = JSON.parse(fs.readFileSync("./dev-data/data/users.json"));
 
 ///////////////////////////
 ////////////////////////////
@@ -45,7 +39,7 @@ const data = JSON.parse(fs.readFileSync("./dev-data/data/softwares.json"));
 //  A middleware to indentify which route youre going throught
 
 app.use((req, res, next) => {
-  console.log("Software Route");
+  console.log("Users Route");
 });
 
 ////////////////////////////
@@ -56,27 +50,11 @@ app.use((req, res, next) => {
 
 // Handlers
 
-//  handler function #1
-
-//  this handler function gets all the softwares in the database
-
-exports.getAllSoftware = (req, res) => {
-  res.status(200).json({
-    status: "200",
-    dataLenght: data.length,
-    data: data,
-  });
-};
-
-// handler function #2
-
-//  this handler function will get only a specific software from the database
-
-exports.getSoftware = (req, res) => {
+exports.getAllUsers = (req, res) => {
   res.status(200).json({
     status: "200",
     id: req.params.id,
-    data: data[req.params.id],
+    data: usersData,
   });
 };
 

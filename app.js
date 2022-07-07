@@ -6,10 +6,15 @@
 const { application } = require("express");
 const express = require("express");
 
+//  requiring global midlleware morgan to get information about the request
+
+const morgan = require("morgan");
+
 //  request the router
 
-const softwareRoutes = require("./routes/softwareRoutes");
+const softwareRoutes = require("./routes/softwareRoutes.js");
 
+const userRoutes = require("./routes/userRoutes.js");
 // //////////////////
 /////////////////////
 
@@ -27,12 +32,27 @@ const app = express();
 ///////////////////////////////////
 ////////////////////////////////////
 
+//  using the morgan third party middleware
+
+app.use(morgan("dev"));
+
+//  creating a global middleware
+
+app.use((req, res, next) => {
+  console.log("                                          ");
+  console.log("Global Middlewares >>>>>>>>>>>>>>>>>>>>>>>");
+  console.log("                                          ");
+  next();
+});
+
 ////////////////////////////////////
 /////////////////////////////////////
 
 //  Routers
 
 app.use("/api/v1/softwares", softwareRoutes);
+
+app.use("/api/v1/softwares", userRoutes);
 
 module.exports = app;
 
